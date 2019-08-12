@@ -10,13 +10,14 @@ export class InfoPaginaService {
 
   info: InfoPagina = {};
   cargada = false;
-  equipo: any[];
 
-  constructor( private http: HttpClient ) { 
+  equipo: any[] = [];
+
+  constructor( private http: HttpClient ) {
 
     // console.log('Servicio de infoPagina listo');
 
-    // vamos rescatando los datos del private
+    // vamos rescatando los datos de los private de abajo
     this.cargarInfo();
     this.cargarEquipo();
 
@@ -26,7 +27,6 @@ export class InfoPaginaService {
     // Leer el archivo JSON y tomar sus propiedades para usar en las pagnas
     this.http.get('assets/data/data-pagina.json')
       .subscribe( (resp: InfoPagina) => {
-
         this.cargada = true;
         this.info = resp;
       });
