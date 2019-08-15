@@ -21,6 +21,7 @@ export class ProductosService {
 
   private cargarProductos() {
 
+    // tslint:disable-next-line: no-shadowed-variable
     return new Promise( ( resolve, reject ) => {
       this.http.get('https://angular-html-dcccc.firebaseio.com/productos_idx.json')
       .subscribe( (resp: Producto[]) => {
@@ -43,11 +44,12 @@ export class ProductosService {
       this.cargarProductos().then( () => {
         // ejecutar despues de tener los productos
         // aquí aplicar el filtro
-        this.filtrarProductos( termino ):
+        this.filtrarProductos( termino );
       });
 
     } else {
       // apllicar el filtro
+      this.filtrarProductos( termino );
     }
 
 
@@ -55,6 +57,24 @@ export class ProductosService {
   }
 
   private filtrarProductos( termino: string ) {
+
+    console.log(this.productos);
+    this.productosFiltrado = [];
+
+    // hacemos que se conviertan los terminos a minusculas
+    termino = termino.toLocaleLowerCase();
+
+    this.productos.forEach( prod => {
+
+      // variable temporal para chequear que los titulos cambian a minúsculas
+      // y la llamaré tituloLower
+      const tituloLower = prod.titulo.toLocaleLowerCase();
+
+      if ( prod.categoria.indexOf( termino) >= 0 || tituloLower.indexOf( termino ) >= 0 ) {
+        this.productosFiltrado.push( prod );
+      }
+
+    });
 
   }
 
