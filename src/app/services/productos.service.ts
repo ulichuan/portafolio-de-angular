@@ -58,7 +58,7 @@ export class ProductosService {
 
   private filtrarProductos( termino: string ) {
 
-    console.log(this.productos);
+    // console.log(this.productos);
     this.productosFiltrado = [];
 
     // hacemos que se conviertan los terminos a minusculas
